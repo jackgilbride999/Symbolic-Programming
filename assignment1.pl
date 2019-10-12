@@ -2,11 +2,17 @@ numeral(0).
 numeral(s(X)) :- numeral(X).
 numeral(X+Y) :- numeral(X), numeral(Y).
 numeral(p(X)) :- numeral(X).
+numeral(-X) :- numeral(X).
+
 
 add(0,X,X).
 add(s(X),Y,s(Z)) :- add(X,Y,Z).
 
 % Helper predicate simp(X, Z)
+simp(-0, 0).                        % 0 negated is just 0
+simp(-p(X), Z) :- minus(p(X), Z).  % put the negation into the preferred numeral form
+simp(-s(X), Z) :- minus(s(X), Z).  % put the negation into the preferred numeral form
+
 simp(0, 0).                         % 0 simplified is just 0
 simp(0+X, Z) :- simp(X, Z).         % 0 added to X is just the simplification of X
 simp(X+0, Z) :- simp(X, Z).         % 0 added to X is just the simplification of X
