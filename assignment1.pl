@@ -20,3 +20,11 @@ simp(s(X), s(Z)) :- simp(X, Z).     % Recursive call to simplify the numberal in
 
 % Define predicate add2(X, Y, Z), where we simplify x, simplify y, and add
 add2(X, Y, Z) :- simp(X, SimpX), simp(Y, SimpY), simp(SimpX+SimpY, Z).
+
+% Helper predicate negate(X, Y)
+negate(0, 0).
+negate(s(X), p(Z)) :- negate(X, Z).
+negate(p(X), s(Z)) :- negate(X, Z).
+
+% Define predicate minus, where we negate X, then simplify it
+minus(X, Y) :- negate(X, NegateX), simp(NegateX, Y).
