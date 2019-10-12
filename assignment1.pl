@@ -4,7 +4,6 @@ numeral(X+Y) :- numeral(X), numeral(Y).
 numeral(p(X)) :- numeral(X).
 numeral(-X) :- numeral(X).
 
-
 add(0,X,X).
 add(s(X),Y,s(Z)) :- add(X,Y,Z).
 
