@@ -33,3 +33,6 @@ negate(p(X), s(Z)) :- negate(X, Z).
 
 % Define predicate minus, where we negate X, then simplify it
 minus(X, Y) :- negate(X, NegateX), simp(NegateX, Y).
+
+% Define predicate subtract
+subtract(X,Y, Z) :- simp(X, SimpX), simp(Y, SimpY),minus(SimpY, MinusY), add2(SimpX, MinusY, Z).
