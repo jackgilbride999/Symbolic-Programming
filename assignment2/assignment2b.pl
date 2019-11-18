@@ -6,4 +6,8 @@
     satisfying this condition where the nationalities are
     english, spanish, japanese and the pets are jaguar, 
     snail and zebra.
+
+    ?- s([red,english,snail, blue,japanese,jaguar, green,spanish,Z], []).
+    Z = zebra;
+    no
 */
