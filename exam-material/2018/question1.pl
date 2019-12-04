@@ -66,3 +66,21 @@ add(succ(X), Y, succ(Z)) :- add(X, Y, Z).
 
 multiply(0, _, 0).
 multiply(succ(X), Y, Z) :- multiply(X, Y, A), add(Y, A, Z).
+
+/*
+d) A binary predicate edge/2 is symmetric if whenever edge holds of a pair (a, b), it also holds of (b, a). An obvious way to make an edge symmetric is by adding the rule
+    edge(A, B) :- edge(B, A).
+    Why is this problematic, and how can we get around this problem whilst turing edge into a symmetric symEdge?
+    We can see that this is problematic by taking the query ?- edge(1, 2), where edge(1, 2) and edge(2, 1) are not in the knowledge base
+    - First, the query will not directly unify with edge(1, 2) so will try edge(1, 2) :- edge(2, 1).
+    - Next, the query will not directly unify with edge (2, 1) so will try edge(2, 1) :- edge(1, 2).
+    - This will repeat indefinitely.
+    So the query causes an infinite loop if there is not an edge from A to B or B to A.
+*/
+    symEdge(A, B) :- edge(A, B); edge(B, A).
+
+%% test cases in knowledge base for part d:
+edge(1, 2).
+edge(2, 3).
+edge(3, 4).
+edge(4, 3).
