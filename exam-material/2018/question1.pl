@@ -31,3 +31,26 @@ ix)     ?- X\=2, X=1
 x)      ?- X < 2
         error
 */
+
+/*
+b)  Suppose we have the following Prolog program
+*/
+q(a).
+q(X) :- X=b, !.
+q(c).
+/*
+    Write all of Prolog's answers to the following queries.
+
+i)      ?- q(X).
+        X = a ;
+        X = b.
+
+ii)     ?- q(X), q(Y).
+        X = a, Y = a;
+        X = a; Y = b;
+        X = b; Y = a;
+        X = b; Y = b;
+
+iii)    ?- q(X), !, q(Y).
+        
+*/
