@@ -31,9 +31,7 @@ L = [0];
 no
 ```
 
-2) Three neighbouring houses that all have a different colour, namely red, blue, and green. People of different nationalities live in the different houses and they all have a different pet.
-
-Leaving out all other constraints, write a DCG that outputs strings `[Col1,Nat1,Pet1, Col2,Nat2,Pet2, Col3,Nat3,Pet3]` satisfying this condition, where the nationalities are *english*, *spanish*, *japanese* and the pets are *jaguar*, *snail*, *zebra*. For example,
+2) Three neighbouring houses that all have a different colour, namely red, blue, and green. People of different nationalities live in the different houses and they all have a different pet. Leaving out all other constraints, write a DCG that outputs strings `[Col1,Nat1,Pet1, Col2,Nat2,Pet2, Col3,Nat3,Pet3]` satisfying this condition, where the nationalities are *english*, *spanish*, *japanese* and the pets are *jaguar*, *snail*, *zebra*. For example,
 ``` prolog
 | ?- s([red,english,snail, blue,japanese,jaguar, green,spanish,Z],
 []).
@@ -50,3 +48,7 @@ L = [1,2];
 L = [1,1,1];
 no
 ```
+
+## Artificial Intelligence
+### Assignment 1
+Define the predicate `astar(+Node,?Path,?Cost,+KB)` that implements A*, returning a path to the goal node [] with minimal cost, given node and KB.
