@@ -18,10 +18,9 @@ Hint: Modify the skeletal search algorithm
     search(New).
     
 so that the head of the list New obtained in add-to-frontier has f-value no larger than any in New’s tail, where
-*/
     f(node) = cost(node) + h(node).
-/*
-    Let the frontier be a list of path-cost pairs (instead of just nodes), being careful to update path cost, and to bring in the heuristic function in forming the frontier New.
+
+Let the frontier be a list of path-cost pairs (instead of just nodes), being careful to update path cost, and to bring in the heuristic function in forming the frontier New.
 */
     less-than([[Node1|_],Cost1],[[Node2|_],Cost2]) :-
         heuristic(Node1,Hvalue1), heuristic(Node2,Hvalue2),
