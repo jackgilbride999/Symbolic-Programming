@@ -54,10 +54,12 @@ astar(Node,Path,Cost) :- kb(KB), astar(Node,Path,Cost,KB).
 
  %   Modify this so that the head of the list New obtained in add-to-frontier has f-value 
  %   no larger than any in New’s tail, where f(node) = cost(node) + h(node).
-search([Node|_], Path, Cost, _) :- goal(Node).
-search([Node|More], Path, Cost, KB) :- findall(X,arc(Node,X),Children),
-    add-to-frontier(Children,More,New),
-    search(New).
+search([[Node, Path, Cost]|_], Path, Cost, _) :- goal(Node).
+search([[Node, NodeCost, PathToNode]|More], Path, Cost, KB) :- findall([X, NewCost, [X|PathToNode]],
+                                                                    (arc(Node,X, ArcCost, KB), NewCost is ArcCost+NodeCost),
+                                                                    Children),
+                                                                add-to-frontier(Children,More,New),
+                                                                search(New, Path, Cost, KB).
 
 
 %   If there are no values to add to frontier, return frontier
