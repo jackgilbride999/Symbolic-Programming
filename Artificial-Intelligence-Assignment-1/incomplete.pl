@@ -54,7 +54,7 @@ astar(Node,Path,Cost) :- kb(KB), astar(Node,Path,Cost,KB).
 
  %   Modify this so that the head of the list New obtained in add-to-frontier has f-value 
  %   no larger than any in New’s tail, where f(node) = cost(node) + h(node).
-search([[Node, Path, Cost]|_], Path, Cost, _) :- goal(Node).
+search([[Node, NodeCost, PathToNode]|_], Path, Cost, _) :- goal(Node), Cost=NodeCost, Path=PathToNode.
 search([[Node, NodeCost, PathToNode]|More], Path, Cost, KB) :- findall([X, NewCost, [X|PathToNode]],
                                                                     (arc(Node,X, ArcCost, KB), NewCost is ArcCost+NodeCost),
                                                                     Children),
@@ -65,17 +65,21 @@ search([[Node, NodeCost, PathToNode]|More], Path, Cost, KB) :- findall([X, NewCo
 %   If there are no values to add to frontier, return frontier
 add2frontier([], Frontier, Frontier).
 %   Else, take the head of the values. Add it to the frontier. Sort the frontier. Recursively call for tail of list. 
-add2frontier([H|T], Frontier, Result) :- insert_sort([H|Frontier], Sorted), add2frontier(T, Sorted, Result).
+add2frontier([H|T], Frontier, Result) :- insert_sort(H, Frontier, Sorted), add2frontier(T, Sorted, Result).
 
 %   We need a sorting algorithm for A*:
-insert_sort(List,Sorted)    :-  i_sort(List,[],Sorted).
+/*insert_sort(List,Sorted)    :-  i_sort(List,[],Sorted).
 i_sort([],Acc,Acc).
 i_sort([H|T],Acc,Sorted)    :-  insert(H,Acc,NAcc),
                                 i_sort(T,NAcc,Sorted).
 
 insert(X,[],[X]).   
 insert(X,[Y|T],[X,Y|T])     :-  less-than(X, Y), !.
-insert(X,[Y|T],[Y|NT])      :-  insert(X,T,NT).
+insert(X,[Y|T],[Y|NT])      :-  insert(X,T,NT).*/
+
+insert_sort(NewNode, [], NewFrontier) :- NewFrontier = [NewNode].
+insert_sort(NewNode,[Head|Tail],NewFrontier) :- lessThan(NewNode,Head), NewFrontier = [NewNode|[Head|Tail]];
+                                                    insertIntoFrontier(NewNode,Tail,Frontier), NewFrontier = [Head|Frontier].
 
 %   Let the frontier be a list of path-cost pairs (instead of just nodes), being careful to update 
 %   path cost, and to bring in the heuristic function in forming the frontier New.
