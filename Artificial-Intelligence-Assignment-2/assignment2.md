@@ -32,8 +32,8 @@ where
 *qn+1(s,a) := q0(s,a) + γ(p(s,a,fit)Vn(fit) + p(s,a,unfit)Vn(unfit)).*
 
 In particular, γ = 0.9 leads to the following qn(s,a) for n = 0,1,2
-0 | exercise | relax | π
-- | -------- | ----- | --
+fitness | exercise | relax | π
+------- | -------- | ----- | --
 fit | 8, 16.955, 23.812 | 10, 17.65, 23.685 | relax, relax, exercise
 unfit | 0, 5.4, 10.017 | 5, 9.5, 13.55 | relax, relax, relax
 
