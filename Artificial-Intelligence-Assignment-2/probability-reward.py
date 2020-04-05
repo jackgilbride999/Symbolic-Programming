@@ -54,4 +54,16 @@ rlist = [
 def p(s, a, sdash):
     return plist[a][s][sdash]
 
+def r(s, a, sdash):
+    return rlist[a][s][sdash]
+
+def q0(s, a):
+    return p(s, a, FIT)*r(s, a, FIT) + p(s, a, UNFIT)*r(s,a,UNFIT)
+
+def vn(s):
+    return max(qn((s, EXERCISE)), qn(s, RELAX))
+
+def qnplus(s,a):
+    return q0(s,a) + gamma(p(s,a,FIT)*vn(FIT) + p(s,a,UNFIT)*vn(UNFIT))
+
 print(p(FIT, RELAX, FIT))
