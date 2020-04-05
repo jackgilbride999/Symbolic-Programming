@@ -27,11 +27,29 @@ rlist = [
 
 
 def p(s, a, sdash):
-    return plist[a][s][sdash]
+    if s == DEAD and sdash == DEAD:
+        return 1
+    elif s == DEAD:
+        return 0
+    elif a == EXERCISE:
+        if sdash == DEAD:
+            return 0.1
+        else:
+            return 0.9 * plist[a][s][sdash]
+    elif a == RELAX:
+        if sdash == DEAD:
+            return 0.01
+        else:
+            return 0.99 * plist[a][s][sdash]
+    else:
+        raise Exception
 
 
 def r(s, a, sdash):
-    return rlist[a][s][sdash]
+    if s == DEAD or sdash == DEAD:
+        return 0
+    else:
+        return rlist[a][s][sdash]
 
 # The γ-discounted value of (s, a) is
 # lim n->∞ qn(s,a)
@@ -64,9 +82,12 @@ while True:
             s = DEAD
         else:
             raise Exception
+        print("Calculating exercise output...")
         exercise_output = q(n, s, EXERCISE)
-        relax_output = q(n, s, RELAX)
         print("qn(s, exercise) = ", exercise_output)
+        print("Calculating relax output...")
+        relax_output = q(n, s, RELAX)
         print("qn(s, relax) = ", relax_output)
+        break
     except:
-        print("Invalid inputs. Please try again.", gamma)
+        print("Invalid inputs. Please try again.")
