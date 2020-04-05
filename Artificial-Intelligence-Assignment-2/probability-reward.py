@@ -25,4 +25,33 @@ relax = {
         'sdash_unfit': [1, 5]
     }
 }
-print(exercise.get('s_fit').get('sdash_fit')[0])
+# reworking this data structure?
+
+# for indexing into first level of list, i.e. parameter a
+EXERCISE = 0
+RELAX = 1
+
+# for indexing into second & third level of list, i.e 
+# parameters s & s'
+FIT = 0
+UNFIT = 1
+
+plist = [
+    [[.99, .01], [.2, .8]],
+    [[.7, .3], [0, 1]]
+]
+
+rlist = [
+    [[8, 8], [0, 0]],
+    [[10, 10], [5, 5]]
+]
+
+
+# The γ-discounted value of (s, a) is
+# lim n->∞ qn(s,a)
+# where
+# q0(s,a) := p(s,a,fit)r(s,a,fit) + p(s,a,unfit)r(s,a,unfit)
+def p(s, a, sdash):
+    return plist[a][s][sdash]
+
+print(p(FIT, RELAX, FIT))
